@@ -69,7 +69,7 @@ help:: ## Show this help
 	grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[33m%-20s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: rpmbuild
-docker-build: docker-image ## Build RPM using container
+docker-build: docker-pull ## Build RPM using container
 ifndef SPEC
 	@echo -e "$(YELLOW)==>$(NO_COLOR) Missing $(RED)SPEC$(NO_COLOR) variable. $(NO_COLOR)\n"; exit 1;
 endif

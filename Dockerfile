@@ -48,4 +48,3 @@ WORKDIR /src
 ENV FLAVOR=rpmbuild DIST=el7
 ENTRYPOINT ["/usr/local/bin/docker-init.sh"]
 #CMD ["/usr/local/bin/docker-init.sh"]
-#CMD /srv/pkg
