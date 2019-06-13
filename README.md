@@ -12,4 +12,4 @@ This would pick all `*.spec` files in current folder and build RPMs. Artefacts
 would be dropped in `pkg/`.
 
 ## Authors
-* **Marko** - [@mbevc1](https://github.com/mbevc1)
+* **Marko Bevc** - [@mbevc1](https://github.com/mbevc1)
