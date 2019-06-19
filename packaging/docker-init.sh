@@ -32,6 +32,13 @@ if ! ${BUILD}; then
     exec "${SHELL:-/bin/bash}" -l
 fi
 
+TOPDIR=$(eval echo "~builder/rpm")
+if [ -d src ]; then
+    cp ${VERBOSE:+-v} -a --reflink=auto src/* "${TOPDIR}/"
+fi
+cp ${VERBOSE:+-v} -a --reflink=auto "${SPEC}" "${TOPDIR}/"
+chown builder. /home/builder -R
+
 # execute the build as rpmbuild user
 runuser builder /usr/local/bin/docker-rpm-build.sh "$@"
 

@@ -9,13 +9,14 @@ TOPDIR="${HOME}/rpm"
 #cp "${VERBOSE:+-v}" -a --reflink=auto src/* "${TOPDIR}/SOURCES/"
 #cp "${VERBOSE:+-v}" -a --reflink=auto "${SPEC}" "${TOPDIR}/SPECS/"
 #SPEC="${TOPDIR}/SPECS/${SPEC##*/}"
-if [ -d src ]; then
-    cp ${VERBOSE:+-v} -a --reflink=auto src/* "${TOPDIR}/"
-fi
-cp ${VERBOSE:+-v} -a --reflink=auto "${SPEC}" "${TOPDIR}/"
 
-spectool -g -R ${SPEC}
+#if [ -d src ]; then
+#    cp ${VERBOSE:+-v} -a --reflink=auto src/* "${TOPDIR}/"
+#fi
+#cp ${VERBOSE:+-v} -a --reflink=auto "${SPEC}" "${TOPDIR}/"
+
 cd ${TOPDIR}
+spectool -g -R ${SPEC}
 
 # build the RPMs
 rpmbuild ${VERBOSE:+-v} --define "debug_package %{nil}" \
