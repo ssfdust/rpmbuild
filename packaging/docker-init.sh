@@ -22,6 +22,13 @@ if [[ -n ${PRE_BUILDDEP} ]]; then
     bash ${VERBOSE:+-x} -c "${PRE_BUILDDEP}"
 fi
 
+TOPDIR=$(eval echo "~builder/rpm")
+if [ -d src ]; then
+    cp ${VERBOSE:+-v} -a --reflink=auto src/* "${TOPDIR}/"
+fi
+cp ${VERBOSE:+-v} -a --reflink=auto "${SPEC}" "${TOPDIR}/"
+chown builder. /home/builder -R
+
 # install build dependencies declared in the specfile
 yum-builddep -y "${SPEC}"
 #spectool -g -R ${SPEC}
@@ -31,13 +38,6 @@ yum-builddep -y "${SPEC}"
 if ! ${BUILD}; then
     exec "${SHELL:-/bin/bash}" -l
 fi
-
-TOPDIR=$(eval echo "~builder/rpm")
-if [ -d src ]; then
-    cp ${VERBOSE:+-v} -a --reflink=auto src/* "${TOPDIR}/"
-fi
-cp ${VERBOSE:+-v} -a --reflink=auto "${SPEC}" "${TOPDIR}/"
-chown builder. /home/builder -R
 
 # execute the build as rpmbuild user
 runuser builder /usr/local/bin/docker-rpm-build.sh "$@"
