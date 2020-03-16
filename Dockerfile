@@ -15,15 +15,14 @@ RUN yum install -y \
     gcc gcc-c++ \
     libtool libtool-ltdl zlib-devel \
     make cmake \
-    epel-release \
-    git \
+    git curl \
     pkgconfig \
+    epel-release \
     sudo \
     automake autoconf \
     yum-utils rpm-build rpmdevtools
-RUN yum install -y \
-    curl \
-    && yum clean all
+
+RUN yum clean all
 
 RUN groupadd -g $GID $USR
 RUN useradd $USR -u $UID -m -g $USR -G users,wheel && \
@@ -45,6 +44,6 @@ RUN chmod 0755 /usr/local/bin/docker-*.sh
 
 #USER $USR
 WORKDIR /src
-ENV FLAVOR=rpmbuild DIST=el7
+#ENV FLAVOR=rpmbuild DIST=el7
 ENTRYPOINT ["/usr/local/bin/docker-init.sh"]
 #CMD ["/usr/local/bin/docker-init.sh"]
