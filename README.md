@@ -11,7 +11,8 @@ make build
 ```
 
 This would pick all `*.spec` files in current folder and build RPMs. Artefacts
-would be dropped in `pkg/`.
+would be dropped in `pkg/`. All files in folder `src/`, if exists are used as
+RPM sources when building.
 
 ### Manual
 
