@@ -30,7 +30,8 @@ cp ${VERBOSE:+-v} -a --reflink=auto "${SPEC}" "${TOPDIR}/"
 chown builder. /home/builder -R
 
 # install build dependencies declared in the specfile
-yum-builddep -y "${SPEC}"
+yum-builddep --define "_version ${VERSION}" --define "_release ${RELEASE}" \
+    -y "${SPEC}"
 #spectool -g -R ${SPEC}
 #rpmbuild -ba ${SPEC}
 
