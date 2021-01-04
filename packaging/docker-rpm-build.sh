@@ -16,7 +16,8 @@ TOPDIR="${HOME}/rpm"
 #cp ${VERBOSE:+-v} -a --reflink=auto "${SPEC}" "${TOPDIR}/"
 
 cd ${TOPDIR}
-spectool -g -R ${SPEC}
+spectool -g -R -define "_version ${VERSION}" --define "_release ${RELEASE}" \
+    ${SPEC}
 
 # build the RPMs
 rpmbuild ${VERBOSE:+-v} --define "debug_package %{nil}" \
