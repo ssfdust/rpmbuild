@@ -1,6 +1,6 @@
 # vim:ft=dockerfile
-ARG OS_RELEASE=7
-FROM centos:${OS_RELEASE}
+ARG OS_RELEASE=8.5
+FROM rockylinux/rockylinux:${OS_RELEASE}
 LABEL maintainer="DevOps <ops@bevc.net>"
 
 ARG USR=builder
@@ -11,7 +11,7 @@ ARG GID=1001
 #RUN update-ca-trust extract
 #COPY ./packaging/*.repo /etc/yum.repos.d/
 
-RUN yum install -y \
+RUN dnf install -y \
     gcc gcc-c++ \
     libtool libtool-ltdl zlib-devel \
     make cmake \
